@@ -1,0 +1,8 @@
+form {
+  .form_submit button{
+    @apply bg-blue-600 text-white !important;
+    &:hover {
+      @apply bg-blue-700 !important;
+    }
+  }
+}

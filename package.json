@@ -16,15 +16,21 @@
     "@babel/core": "^7.9.0",
     "@babel/preset-env": "^7.9.5",
     "@babel/preset-react": "^7.9.4",
+    "@xstate/react": "^0.8.1",
     "babel-loader": "^8.1.0",
+    "base-64": "^0.1.0",
+    "formik": "^2.1.4",
     "html-loader": "^1.1.0",
     "html-webpack-plugin": "^4.2.0",
     "mini-css-extract-plugin": "^0.9.0",
     "react": "^16.13.1",
     "react-dom": "^16.13.1",
+    "semantic-ui-react": "^0.88.2",
     "webpack": "^4.42.1",
     "webpack-cli": "^3.3.11",
-    "webpack-dev-server": "^3.10.3"
+    "webpack-dev-server": "^3.10.3",
+    "xstate": "^4.8.0",
+    "yup": "^0.28.3"
   },
   "devDependencies": {
     "autoprefixer": "^9.7.6",
@@ -38,12 +44,14 @@
     "eslint-plugin-promise": "^4.2.1",
     "eslint-plugin-react": "^7.19.0",
     "eslint-plugin-standard": "^4.0.1",
+    "file-loader": "^6.0.0",
     "husky": "^4.2.5",
     "postcss-cli": "^7.1.0",
     "postcss-loader": "^3.0.0",
     "postcss-nested": "^4.2.1",
     "standard": "^14.3.3",
-    "tailwindcss": "^1.2.0"
+    "tailwindcss": "^1.2.0",
+    "url-loader": "^4.1.0"
   },
   "husky": {
     "hooks": {
