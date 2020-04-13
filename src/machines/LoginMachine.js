@@ -1,11 +1,12 @@
 import { Machine } from 'xstate'
+
 const base64 = require('base-64')
 
 export const loginMachine = Machine({
   id: 'login',
   initial: 'idle',
   context: {
-    isFailed: false
+    token: null
   },
   states: {
     idle: {
@@ -24,7 +25,12 @@ export const loginMachine = Machine({
         }
       }
     },
-    authorized: {},
+    authorized: {
+      invoke: {
+        src: 'handleAuthorized',
+        onDone: 'idle'
+      }
+    },
     unauthorized: {
       on: {
         SUBMIT: 'loading'
@@ -33,7 +39,7 @@ export const loginMachine = Machine({
   }
 }, {
   services: {
-    handleLogin: (_, event) => {
+    handleLogin: (context, event) => {
       try {
         const headers = new Headers() // eslint-disable-line
         const username = event.payload.email
@@ -45,6 +51,7 @@ export const loginMachine = Machine({
           headers: headers,
           cache: 'no-cache'
         }).then(data => data.json())
+        .then(data => context.token = data.body)
         /* eslint-enable */
         return data
       } catch (e) {

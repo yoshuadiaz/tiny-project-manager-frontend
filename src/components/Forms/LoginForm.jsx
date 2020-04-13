@@ -5,8 +5,8 @@ import './styles.css'
 const LoginForm = props => {
   const formik = useFormik({
     initialValues: {
-      email: '',
-      password: ''
+      email: 'john.doe@corp.com',
+      password: 'qwerty'
     },
     validationSchema: props.validationSchema,
     onSubmit: props.handleSubmit
