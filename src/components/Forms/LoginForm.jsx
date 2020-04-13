@@ -5,8 +5,8 @@ import './styles.css'
 const LoginForm = props => {
   const formik = useFormik({
     initialValues: {
-      email: 'john.doe@corp.com',
-      password: 'qwerty'
+      email: '',
+      password: ''
     },
     validationSchema: props.validationSchema,
     onSubmit: props.handleSubmit
@@ -18,7 +18,7 @@ const LoginForm = props => {
         onSubmit={formik.handleSubmit}
         loading={props.state === 'loading'}
       >
-        {props.state === 'unauthorized' && (<Message negative header='Error' content='Tu contraseña o tu correo estan mal.' />)}
+        {props.state === 'unauthorized' && props.isFailed && (<Message negative header='Error' content='Tu contraseña o tu correo estan mal.' />)}
 
         {props.state === 'authorized' && (<Message positive header='Éxito' content='Serás redirigido en breve' />)}
         <Form.Field

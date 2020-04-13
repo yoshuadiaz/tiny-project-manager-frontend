@@ -10,19 +10,24 @@ import Context from './Context'
 const App = props => (
   <div>
     <Context.Consumer>
-      {({ isAuth }) => {
-        return !isAuth ? (
-          <Router>
-            <Login path='/' />
-            <Login path='/login' />
-            <NotFound default />
-          </Router>
-        ) : (
-          <Router>
-            <Dashboard path='/' />
-            <Dashboard path='/dashboard' />
-            <NotFound default />
-          </Router>
+      {({ user }) => {
+        return (
+          <div>
+            {!user && (
+              <Router>
+                <Login path='/' />
+                <Login path='/login' />
+                <NotFound default />
+              </Router>
+            )}
+            {user && user.id && (
+              <Router>
+                <Dashboard path='/' />
+                <Dashboard path='/dashboard' />
+                <NotFound default />
+              </Router>
+            )}
+          </div>
         )
       }}
     </Context.Consumer>

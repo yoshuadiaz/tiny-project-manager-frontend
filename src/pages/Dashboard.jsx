@@ -1,8 +1,9 @@
 import React from 'react'
+import DashboardContainer from '../containers/Dashboard'
 
 const Dashboard = props => (
   <div>
-    <h1>Dashboard</h1>
+    <DashboardContainer />
   </div>
 )
 
