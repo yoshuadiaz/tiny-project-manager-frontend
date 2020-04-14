@@ -1,0 +1,52 @@
+.dashboard {
+  @apply min-h-screen bg-gray-300 font-mono;
+
+  &_wrap {
+    @apply grid grid-flow-col grid-cols-6 mt-4 row-gap-2 col-gap-8 mx-auto;
+  }
+  &_header {
+    @apply col-start-1 col-end-7 pt-2 grid grid-cols-5 mb-4 items-end;
+
+    &_sectionTitle {
+      @apply text-blue-600 font-bold text-xl col-start-1 col-end-3;
+    }
+
+    &_sectionActions {
+      @apply col-start-3 col-end-7 text-right;
+    }
+  }
+  
+  &_sidebar {
+    @apply col-start-1 col-end-3;
+
+    &_projectList {
+      @apply bg-gray-100 p-2 rounded shadow;
+    }
+
+    &_item {
+      @apply bg-transparent inline-block w-full my-1 px-2 py-1 text-center;
+
+      &:hover {
+        @apply bg-blue-200 text-gray-900;
+      }
+    }
+  }
+
+  &_content {
+    @apply col-start-3 col-end-7
+  }
+}
+
+.entity {
+  &_content {
+    @apply grid grid-flow-row
+  }
+  &_header {
+    @apply grid grid-cols-10 p-2 text-center;
+    grid-template-columns: 1fr 3fr 2fr 2fr 2fr;
+  }
+  &_item {
+    @apply bg-white grid mb-2 rounded p-2 text-center;
+    grid-template-columns: 1fr 3fr 2fr 2fr 2fr;
+  }
+}

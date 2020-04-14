@@ -1,0 +1,17 @@
+.header {
+  @apply bg-gray-100 p-4 shadow-md;
+  .content {
+    @apply grid grid-cols-2
+  }
+
+  &_user {
+    @apply text-right;
+  }
+
+  &_logo {
+    @apply text-blue-700 text-xl inline-block;
+    svg {
+      @apply mr-2;
+    }
+  }
+}
