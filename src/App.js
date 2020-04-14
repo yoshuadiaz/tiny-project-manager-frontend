@@ -1,6 +1,7 @@
 import React from 'react'
 import { Router } from '@reach/router'
 import Login from './pages/Login'
+import Register from './pages/Register'
 import NotFound from './pages/NotFound'
 import Dashboard from './pages/Dashboard'
 
@@ -16,8 +17,8 @@ const App = props => (
             {!user && (
               <Router>
                 <Login path='/' />
-                <Login path='/login' />
-                <NotFound default />
+                <Register path='/register' />
+                <Login path='/login' default />
               </Router>
             )}
             {user && user.id && (

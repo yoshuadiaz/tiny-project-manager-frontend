@@ -30,7 +30,6 @@ const Login = (props) => {
             <i className='fas fa-handshake' />
           </div>
           <h1>Tiny Project Manager</h1>
-          <pre>{generalContext.value}</pre>
           <LoginForm
             state={generalContext.state}
             isFailed={generalContext.isFailed}

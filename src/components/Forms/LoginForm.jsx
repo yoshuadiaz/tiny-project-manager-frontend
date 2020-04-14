@@ -16,7 +16,7 @@ const LoginForm = props => {
     <>
       <Form
         onSubmit={formik.handleSubmit}
-        loading={props.state === 'loading'}
+        loading={props.state === 'fetching'}
       >
         {props.state === 'unauthorized' && props.isFailed && (<Message negative header='Error' content='Tu contraseña o tu correo estan mal.' />)}
 

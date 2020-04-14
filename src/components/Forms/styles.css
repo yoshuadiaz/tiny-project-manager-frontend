@@ -1,4 +1,7 @@
 form {
+  h2 {
+    @apply text-blue-700 text-lg font-bold border-b-2 pb-2 mb-2;
+  }
   .form_submit button{
     @apply bg-blue-600 text-white !important;
     &:hover {
