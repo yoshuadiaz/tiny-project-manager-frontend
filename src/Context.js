@@ -26,18 +26,32 @@ const Provider = ({ children }) => {
           )
             .then(data => data.json())
             .then(data => {
-              localStorage.setItem('context', JSON.stringify(data.body)) // eslint-disable-line
+              document.cookie = `token=${data.body.token}`
               return data.body
             })
           /* eslint-enable */
         } catch (e) {
           throw new Error(e.message)
         }
+      },
+      handleCheck: (context, event) => {
+        /* eslint-disable */
+        return fetch('http://localhost:7000/api/auth/check', {
+          method: 'POST',
+          credentials: 'include'
+        })
+          .then(data => {
+            return data.json()
+          })
+          .then(data => {
+            return data.body
+          })
+        /* eslint-enable */
       }
     },
     context: {
-      token: localStorage.context ? JSON.parse(localStorage.context).token : null, // eslint-disable-line
-      user: localStorage.context ? JSON.parse(localStorage.context).user : null, // eslint-disable-line
+      token: null,
+      user: null,
       isFailed: false
     }
   })

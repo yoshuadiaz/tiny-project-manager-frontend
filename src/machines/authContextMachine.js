@@ -7,10 +7,20 @@ const authContextMachine = Machine({
   context: {
     user: null,
     token: null,
-    isFailed: false
+    isFailed: false,
+    isInitialChecked: false
   },
   states: {
     unauthorized: {
+      invoke: {
+        src: 'handleCheck',
+        onDone: 'authorized',
+        onError: {
+          actions: (context) => {
+            context.isInitialChecked = true
+          }
+        }
+      },
       on: {
         submit: 'fetching'
       }

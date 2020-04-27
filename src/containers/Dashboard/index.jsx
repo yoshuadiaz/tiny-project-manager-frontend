@@ -51,10 +51,10 @@ const DashboardContainer = props => {
                 <span>
                   <input type='checkbox' />
                 </span>
-                <span>header 2</span>
-                <span>header 3</span>
-                <span>header 4</span>
-                <span>header 5</span>
+                <span>Empleado</span>
+                <span>Salario</span>
+                <span>Estado</span>
+                <span>Acciones</span>
               </div>
               <article className='entity_item'>
                 <span>
