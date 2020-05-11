@@ -1,0 +1,19 @@
+.sidebar {
+  @apply col-start-1 col-end-3;
+
+  &_content {
+    @apply bg-gray-100 p-2 rounded shadow;
+
+    &_entityName {
+      @apply text-blue-600 font-bold text-xl col-start-1 col-end-3;
+    }
+
+    &_item {
+      @apply bg-transparent inline-block w-full my-1 px-2 py-1 text-center cursor-pointer;
+
+      &:hover {
+        @apply bg-blue-200 text-gray-900;
+      }
+    }
+  }
+}

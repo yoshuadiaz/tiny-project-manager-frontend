@@ -15,22 +15,6 @@
       @apply col-start-3 col-end-7 text-right;
     }
   }
-  
-  &_sidebar {
-    @apply col-start-1 col-end-3;
-
-    &_projectList {
-      @apply bg-gray-100 p-2 rounded shadow;
-    }
-
-    &_item {
-      @apply bg-transparent inline-block w-full my-1 px-2 py-1 text-center;
-
-      &:hover {
-        @apply bg-blue-200 text-gray-900;
-      }
-    }
-  }
 
   &_content {
     @apply col-start-3 col-end-7

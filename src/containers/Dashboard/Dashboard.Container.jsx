@@ -10,28 +10,30 @@ const DashboardContainer = props => {
   const authContext = useContext(GeneralContext)
   const [company, sendToCompanyMachine] = useMachine(loadMachine, {
     services: {
-      handleFetch: getFetch('/company', authContext.token)
+      handleFetch: getFetch('/company', authContext.token),
+      handleSuccess: () => {}
     }
   })
 
   const [user, sendToUserMachine] = useMachine(loadMachine, {
     services: {
-      handleFetch: getFetch('/user/me', authContext.token)
+      handleFetch: getFetch('/user/me', authContext.token),
+      handleSuccess: () => {}
     }
   })
 
   useEffect(() => {
-    sendToCompanyMachine('submit')
-    sendToUserMachine('submit')
-  }, [company])
+    if (!user.context.data && !company.context.data) {
+      sendToCompanyMachine('submit')
+      sendToUserMachine('submit')
+    }
+  }, [])
 
   return (
     <div className='dashboard'>
       <Header company={company} user={user} />
       <div className='content'>
-        <div className='dashboard_wrap'>
-          {props.children}
-        </div>
+        {props.children}
       </div>
     </div>
   )

@@ -1,11 +1,10 @@
 import React from 'react'
-
+import { hot } from 'react-hot-loader/root'
+import ClientsContainer from '../containers/Clients/Clients.Container'
 const Clients = (props) => {
   return (
-    <div>
-      Clients
-    </div>
+    <ClientsContainer />
   )
 }
 
-export default Clients
+export default hot(Clients)
