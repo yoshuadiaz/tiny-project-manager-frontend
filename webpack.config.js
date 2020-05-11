@@ -3,14 +3,15 @@ const HtmlWebPackPlugin = require('html-webpack-plugin')
 const MiniCssExtractPlugin = require('mini-css-extract-plugin')
 
 module.exports = {
-  entry: './src/index.js',
+  entry: ['react-hot-loader/patch', './src/index.js'],
   output: {
     path: path.resolve(__dirname, 'dist'),
     filename: 'bundle.js',
     publicPath: '/'
   },
   resolve: {
-    extensions: ['.js', '.jsx']
+    extensions: ['.js', '.jsx'],
+    alias: { 'react-dom': '@hot-loader/react-dom' }
   },
   module: {
     rules: [
@@ -32,6 +33,7 @@ module.exports = {
       {
         test: /\.css$/,
         use: [
+          'css-hot-loader',
           {
             loader: MiniCssExtractPlugin.loader
           },
