@@ -27,12 +27,14 @@ const fetchMachine = Machine({
         context.data = event.data
       },
       on: {
-        refresh: 'fetching'
+        refresh: 'fetching',
+        submit: 'fetching'
       }
     },
     failure: {
       on: {
-        retry: 'fetching'
+        retry: 'fetching',
+        submit: 'fetching'
       }
     }
   }
