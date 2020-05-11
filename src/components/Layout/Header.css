@@ -1,11 +1,18 @@
 .header {
   @apply bg-gray-100 p-4 shadow-md;
   .content {
-    @apply grid grid-cols-2
+    @apply flex justify-between;
   }
 
   &_user {
     @apply text-right;
+  }
+
+  &_menu {
+    @apply text-left;
+    ul li{
+      @apply inline-block mx-2;
+    }
   }
 
   &_logo {
