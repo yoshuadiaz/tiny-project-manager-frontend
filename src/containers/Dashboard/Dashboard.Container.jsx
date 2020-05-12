@@ -1,23 +1,21 @@
-import React, { useContext, useEffect } from 'react'
+import React, { useEffect } from 'react'
 import { useMachine } from '@xstate/react'
 import Header from '../../components/Layout/Header'
-import { Context as GeneralContext } from '../../Context'
 import loadMachine from '../../machines/fetchMachine'
 import './style.css'
 import { getFetch } from '../../utils/networkUtils'
 
 const DashboardContainer = props => {
-  const authContext = useContext(GeneralContext)
   const [company, sendToCompanyMachine] = useMachine(loadMachine, {
     services: {
-      handleFetch: getFetch('/company', authContext.token),
+      handleFetch: (context, event) => getFetch('/company'),
       handleSuccess: () => {}
     }
   })
 
   const [user, sendToUserMachine] = useMachine(loadMachine, {
     services: {
-      handleFetch: getFetch('/user/me', authContext.token),
+      handleFetch: (context, event) => getFetch('/user/me'),
       handleSuccess: () => {}
     }
   })

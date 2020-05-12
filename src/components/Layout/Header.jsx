@@ -6,11 +6,11 @@ const Header = props => {
   const company = props.company
   const user = props.user
   return (
-    <header className='header'>
+    <header className='main_header'>
       <div className='content'>
         {company.value === 'fetching' && <p>Loading...</p>}
         {company.value === 'success' && (
-          <figure className='header_logo'>
+          <figure className='main_header_logo'>
             <Link to='/dashboard'>
               <i className='fas fa-handshake' />
               {company.context.data.name}
@@ -18,7 +18,7 @@ const Header = props => {
           </figure>
         )}
 
-        <nav className='header_menu'>
+        <nav className='main_header_menu'>
           <ul>
             <li>
               <Link to='/dashboard'>Proyectos</Link>
@@ -35,7 +35,7 @@ const Header = props => {
           </ul>
         </nav>
 
-        <div className='header_user'>
+        <div className='main_header_user'>
           {user.value === 'fetching' && <p>Loading...</p>}
           {
             user.value === 'success' && (

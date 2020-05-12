@@ -1,5 +1,5 @@
-.header {
-  @apply bg-gray-100 p-4 shadow-md;
+.main_header {
+  @apply bg-gray-100 p-4 shadow-lg relative;
   .content {
     @apply flex justify-between;
   }
