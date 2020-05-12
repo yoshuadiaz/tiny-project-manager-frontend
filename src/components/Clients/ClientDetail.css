@@ -1,3 +1,9 @@
-.clients_detail {
-  @apply col-start-3 col-end-7;
+.clients {
+  &_detail {
+    @apply col-start-3 col-end-9;
+
+    &_info {
+      @apply bg-gray-100 rounded shadow p-2
+    }
+  }
 }

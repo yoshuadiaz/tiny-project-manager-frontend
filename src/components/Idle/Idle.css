@@ -1,0 +1,12 @@
+.idle {
+  @apply bg-red-400 col-start-3 col-end-9 relative rounded-md overflow-hidden;
+
+  &_cover {
+    @apply object-cover w-full;
+    max-height: 400px;
+  }
+
+  &_message {
+    @apply absolute bottom-0 right-0 text-white p-8 shadow-xs rounded-md bg-blue-900;
+  }
+}

@@ -1,25 +1,24 @@
-import React, { useContext, useEffect, useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { useMachine } from '@xstate/react'
 import loadMachine from '../../machines/fetchMachine'
-import { Context as GeneralContext } from '../../Context'
 import { getFetch } from '../../utils/networkUtils'
 import Sidebar from '../../components/Layout/Sidebar'
+import ClientDetail from '../../components/Clients/ClientDetail'
 import '../../components/Clients/ClientDetail.css'
+import Idle from '../../components/Idle/Idle'
+import ClientsIdle from '../../assets/login.jpeg'
 const ClientContainer = props => {
-  const [selectedClient, setSelectedClient] = useState('')
-  const authContext = useContext(GeneralContext)
+  const [selectedClient, setSelectedClient] = useState(null)
   const [clients, sendToClientMachine] = useMachine(loadMachine, {
     services: {
-      handleFetch: getFetch('/client', authContext.token),
+      handleFetch: (event, context) => getFetch('/client'),
       handleSuccess: () => {}
     }
   })
 
   const [contacts, sendToContactsMachine] = useMachine(loadMachine, {
     services: {
-      handleFetch: (_, event) => {
-        return getFetch(`/contact/${event.id}`, authContext.token)
-      },
+      handleFetch: (context, event) => getFetch(`/contact/${event.id}`),
       handleSuccess: () => {}
     }
   })
@@ -33,29 +32,16 @@ const ClientContainer = props => {
 
   return (
     <div className='clients dashboard_wrap'>
-      <Sidebar items={clients.context.data} state={clients.value} entityName='Clientes' handleSelectItem={handleSelectItem} />
-      <div className='clients_detail'>
-        <div>
-          <pre>{JSON.stringify(selectedClient, null, 2)}</pre>
-        </div>
-        <br />
-        <br />
-        <br />
-        <div>
-          {contacts.value === 'idle' && <p>Seleccione algo</p>}
-          {contacts.value === 'fetching' && <p>Loading</p>}
-          {contacts.value === 'success' && contacts.context.data.length === 0 && (
-            <div>
-            Colección vacia
-            </div>
-          )}
-          {contacts.value === 'success' && contacts.context.data.length > 0 && (
-            <div>
-              <pre>{JSON.stringify(contacts.context.data, null, 2)}</pre>
-            </div>
-          )}
-        </div>
-      </div>
+      <Sidebar
+        items={clients.context.data}
+        state={clients.value}
+        entityName='Clientes'
+        handleSelectItem={handleSelectItem}
+      />
+      {!selectedClient && <Idle message='Seleccione algún cliente' src={ClientsIdle} />}
+      {selectedClient && (
+        <ClientDetail client={selectedClient} subitems={contacts.context.data} status={contacts.value} />
+      )}
     </div>
   )
 }
