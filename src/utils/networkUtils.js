@@ -1,11 +1,8 @@
 import axios from 'axios'
 
-export const getFetch = (route, token) => axios.get(
+export const getFetch = (route, data = null) => axios.get(
   `http://localhost:7000/api${route}`, {
-    headers: {
-      Accept: 'application/json',
-      'Content-Type': 'application/json',
-      Authorization: `Bearer ${token}`
-    }
+    withCredentials: true,
+    data
   })
   .then(({ data }) => data.body)

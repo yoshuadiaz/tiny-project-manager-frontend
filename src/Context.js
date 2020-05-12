@@ -1,6 +1,6 @@
 import React, { createContext } from 'react'
-import base64 from 'base-64'
 import { useMachine } from '@xstate/react'
+import axios from 'axios'
 
 import AuthContextMachine from './machines/authContextMachine'
 
@@ -11,42 +11,34 @@ const Provider = ({ children }) => {
     services: {
       handleLogin: (context, event) => {
         try {
-          const headers = new Headers() // eslint-disable-line
           const username = event.payload.email
           const password = event.payload.password
-          headers.append('Authorization', 'Basic ' + base64.encode(username + ':' + password))
-          /* eslint-disable */
-          return fetch(
+          return axios.post(
             'http://localhost:7000/api/auth/login',
             {
-              method: 'POST',
-              headers: headers,
-              cache: 'no-cache'
+            },
+            {
+              withCredentials: true,
+              auth: {
+                username,
+                password
+              }
             }
           )
-            .then(data => data.json())
-            .then(data => {
-              document.cookie = `token=${data.body.token}`
+            .then(({ data }) => {
               return data.body
             })
-          /* eslint-enable */
         } catch (e) {
           throw new Error(e.message)
         }
       },
       handleCheck: (context, event) => {
-        /* eslint-disable */
-        return fetch('http://localhost:7000/api/auth/check', {
-          method: 'POST',
-          credentials: 'include'
+        return axios.post('http://localhost:7000/api/auth/check', {}, {
+          withCredentials: true
         })
-          .then(data => {
-            return data.json()
-          })
-          .then(data => {
+          .then(({ data }) => {
             return data.body
           })
-        /* eslint-enable */
       }
     },
     context: {
