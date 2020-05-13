@@ -1,6 +1,6 @@
 import React, { createContext } from 'react'
 import { useMachine } from '@xstate/react'
-import axios from 'axios'
+import { sendPost } from './utils/networkUtils'
 
 import AuthContextMachine from './machines/authContextMachine'
 
@@ -13,32 +13,18 @@ const Provider = ({ children }) => {
         try {
           const username = event.payload.email
           const password = event.payload.password
-          return axios.post(
-            'http://localhost:7000/api/auth/login',
-            {
-            },
-            {
-              withCredentials: true,
-              auth: {
-                username,
-                password
-              }
+          return sendPost('/auth/login', {}, {
+            auth: {
+              username,
+              password
             }
-          )
-            .then(({ data }) => {
-              return data.body
-            })
+          })
         } catch (e) {
           throw new Error(e.message)
         }
       },
       handleCheck: (context, event) => {
-        return axios.post('http://localhost:7000/api/auth/check', {}, {
-          withCredentials: true
-        })
-          .then(({ data }) => {
-            return data.body
-          })
+        return sendPost('/auth/check')
       }
     },
     context: {

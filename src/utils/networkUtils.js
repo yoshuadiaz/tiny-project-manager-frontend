@@ -6,3 +6,13 @@ export const getFetch = (route, data = null) => axios.get(
     data
   })
   .then(({ data }) => data.body)
+
+export const sendPost = (route, payload = {}, config = {}) => axios.post(
+  `http://localhost:7000/api${route}`, {
+    ...payload
+  },
+  {
+    withCredentials: true,
+    ...config
+  })
+  .then(({ data }) => data.body)
