@@ -1,11 +1,9 @@
 import React from 'react'
+import { hot } from 'react-hot-loader/root'
+import EmployeesContainer from '../containers/Employees/Employees.Container'
 
 const Employees = (props) => {
-  return (
-    <div>
-      Employees
-    </div>
-  )
+  return (<EmployeesContainer />)
 }
 
-export default Employees
+export default hot(Employees)
