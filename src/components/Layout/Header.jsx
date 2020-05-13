@@ -27,9 +27,6 @@ const Header = props => {
               <Link to='/dashboard/clients'>Clientes</Link>
             </li>
             <li>
-              <Link to='/dashboard/contacts'>Contactos</Link>
-            </li>
-            <li>
               <Link to='/dashboard/employees'>Empleados</Link>
             </li>
           </ul>
