@@ -15,7 +15,9 @@ const ClientInfo = props => {
         <Card.Description>
           <p>{client.description}</p>
           <Divider />
-          <p><strong>Teléfono</strong>: {client.phone} </p>
+          <p><strong>Teléfono</strong>:
+            <a href={`tel:+${client.phone}`}>{client.phone}</a>
+          </p>
           <p><strong>Dirección</strong>: {client.address}</p>
           <p><strong>Notas</strong>: {client.notes}</p>
         </Card.Description>
