@@ -1,6 +1,7 @@
 import React from 'react'
 import { Table, Divider, TableCell } from 'semantic-ui-react'
 import dayjs from 'dayjs'
+import { UserTableCell } from '../Table/TableCells'
 
 const ContactsTable = props => {
   const headerRow = ['Nombre completo', 'Contacto', 'Cumpleaños', 'Notas']
@@ -8,11 +9,12 @@ const ContactsTable = props => {
     key: cols.id,
     cells: [
       (
-        <TableCell key={`contact_fullname_${cols.id}`}>
-          {`${cols.first_name} ${cols.last_name}` || 'Sin especificar'}
-          <Divider fitted />
-          <small>{`Ocupación: ${cols.occupation || 'Sin especificar'}`}</small>
-        </TableCell>
+        <UserTableCell
+          key={`contact_fullname_${cols.id}`}
+          firstName={cols.first_name}
+          lastName={cols.last_name}
+          occupation={cols.occupation}
+        />
       ),
       (
         <TableCell key={`contact_contactInfo_${cols.id}`}>
