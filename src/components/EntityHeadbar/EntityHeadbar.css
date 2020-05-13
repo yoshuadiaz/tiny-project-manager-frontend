@@ -1,0 +1,11 @@
+.entityHeadbar {
+  @apply grid grid-cols-8 col-gap-4 items-center;
+
+  &_title {
+    @apply col-start-1 col-end-4 text-2xl text-blue-600 font-bold;
+  }
+
+  &_actions {
+    @apply col-start-4 col-end-9 text-right;
+  }
+}
