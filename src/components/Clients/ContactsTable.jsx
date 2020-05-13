@@ -1,10 +1,10 @@
 import React from 'react'
 import { Table, Divider, TableCell } from 'semantic-ui-react'
 import dayjs from 'dayjs'
-import { UserTableCell } from '../Table/TableCells'
+import { UserTableCell, ActionsTableCell } from '../Table/TableCells'
 
 const ContactsTable = props => {
-  const headerRow = ['Nombre completo', 'Contacto', 'Cumpleaños', 'Notas']
+  const headerRow = ['Nombre completo', 'Contacto', 'Cumpleaños', 'Notas', 'Acciones']
   const renderBodyRow = (cols) => ({
     key: cols.id,
     cells: [
@@ -45,7 +45,14 @@ const ContactsTable = props => {
       ),
 
       dayjs(cols.birthday).format('MMM DD, YYYY') || 'Sin especificar',
-      cols.notes || 'Sin especificar'
+      cols.notes || 'Sin especificar',
+      (
+        <ActionsTableCell
+          key={`contacts_actions_${cols.id}`}
+          onHandleUpdate={() => props.onHandleUpdate(cols)}
+          onHandleDelete={() => props.onHandleDelete(cols)}
+        />
+      )
     ]
   })
   return (

@@ -1,4 +1,7 @@
 .clients {
+  &_entityHeadbar {
+    @apply col-start-1 col-end-9;
+  }
   &_detail {
     @apply col-start-3 col-end-9;
 

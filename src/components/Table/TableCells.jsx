@@ -15,12 +15,12 @@ export const ActionsTableCell = props => (
       <Button
         icon='trash alternate'
         negative
-        onClick={props.handleDelete}
+        onClick={props.onHandleDelete}
       />
       <Button
         icon='edit'
         color='blue'
-        onClick={props.handleUpdate}
+        onClick={props.onHandleUpdate}
       />
     </ButtonGroup>
   </TableCell>

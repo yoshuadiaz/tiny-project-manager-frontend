@@ -2,7 +2,7 @@
   @apply min-h-screen bg-gray-300 font-mono;
 
   &_wrap {
-    @apply grid grid-flow-col grid-cols-8 mt-4 row-gap-2 col-gap-8 mx-auto;
+    @apply grid grid-flow-col grid-cols-8 mt-4 row-gap-4 col-gap-8 mx-auto;
   }
   &_header {
     @apply col-start-1 col-end-7 pt-2 grid grid-cols-5 mb-4 items-end;
