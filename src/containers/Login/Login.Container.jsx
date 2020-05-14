@@ -1,18 +1,10 @@
 import React, { useContext } from 'react'
-import * as Yup from 'yup'
+import { Divider } from 'semantic-ui-react'
+import { Link } from '@reach/router'
 import { Context as GeneralContext } from '../../Context'
-
+import { loginValidationSchema } from '../../validations/auth.js'
 import LoginForm from '../../components/Forms/LoginForm'
-
 import './styles.css'
-
-const loginValidationSchema = Yup.object({
-  password: Yup.string()
-    .required('Requerido'),
-  email: Yup.string()
-    .email('Ingrese un correo válido')
-    .required('Requerido')
-})
 
 const Login = (props) => {
   const generalContext = useContext(GeneralContext)
@@ -36,6 +28,8 @@ const Login = (props) => {
             handleSubmit={handleSubmit}
             validationSchema={loginValidationSchema}
           />
+          <Divider />
+          <p>¿No tiene una cuenta? <strong><Link to='/register'>Regístrese aquí</Link></strong></p>
         </section>
       </div>
       <div className='login_image' />

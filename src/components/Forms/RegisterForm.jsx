@@ -9,6 +9,7 @@ const RegisterForm = props => {
         first_name: '',
         last_name: '',
         email: '',
+        occupation: '',
         password: '',
         confirm: ''
       },
@@ -60,6 +61,17 @@ const RegisterForm = props => {
               }
             />
           </Form.Group>
+          <Form.Field
+            label='Cargo u ocupación'
+            control='input'
+            type='text'
+            {...formik.getFieldProps('user.occupation')}
+            error={
+              formik.touched.user && formik.touched.user.occupation && formik.errors.user && formik.errors.user.occupation
+                ? { content: formik.errors.user.occupation }
+                : null
+            }
+          />
           <Form.Field
             label='Email'
             control='input'

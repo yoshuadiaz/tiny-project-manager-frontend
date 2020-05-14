@@ -2,9 +2,7 @@ import React from 'react'
 import LoginContainer from '../containers/Login/Login.Container'
 
 const Login = props => (
-  <>
-    <LoginContainer />
-  </>
+  <LoginContainer />
 )
 
 export default Login
