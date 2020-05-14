@@ -16,6 +16,7 @@ const EmployeesTable = props => {
       ),
       (
         <TableCell key={`employee_job_${cols.id}`}>
+          {!cols.salary && (<p>Salario sin definir</p>)}
           {cols.salary && Intl.NumberFormat('en', { style: 'currency', currency: cols.currency }).format(cols.salary)}
           <Divider fitted />
           {cols.work_type_id && cols.work_type_id}

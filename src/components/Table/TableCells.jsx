@@ -3,9 +3,9 @@ import { ButtonGroup, Button, Divider, TableCell } from 'semantic-ui-react'
 
 export const UserTableCell = props => (
   <TableCell>
-    {`${props.firstName} ${props.lastName}` || 'Sin especificar'}
+    <strong>{`${props.firstName} ${props.lastName}` || 'Sin especificar'}</strong>
     <Divider fitted />
-    <small>{`Ocupación: ${props.occupation || 'Sin especificar'}`}</small>
+    <small><strong>{`${props.occupation || 'Sin especificar'}`}</strong></small>
   </TableCell>
 )
 
