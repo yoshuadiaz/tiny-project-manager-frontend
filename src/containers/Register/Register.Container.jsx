@@ -3,8 +3,8 @@ import { useMachine } from '@xstate/react'
 import { Link, navigate } from '@reach/router'
 import { Divider } from 'semantic-ui-react'
 import { registerValidationSchema } from '../../validations/auth'
-
 import RegisterMachine from '../../machines/fetchMachine'
+import { sendPost } from '../../utils/networkUtils'
 
 import RegisterForm from '../../components/Forms/RegisterForm'
 
@@ -13,20 +13,7 @@ import './styles.css'
 const RegisterContainer = props => {
   const [registerState, sendToRegisterMachine] = useMachine(RegisterMachine, {
     services: {
-      handleFetch: (_, event) => {
-        /* eslint-disable */
-        return fetch('http://localhost:7000/api/auth/register', {
-          method: 'POST',
-          headers: {
-            Accept: 'application/json',
-            'Content-Type': 'application/json'
-          },
-          body: JSON.stringify(event.payload)
-        })
-          .then(data => data.json())
-          .then(data => data)
-        /* eslint-enable */
-      },
+      handleFetch: (context, event) => sendPost('/auth/register', event.payload),
       handleSuccess: () => {
         navigate('/login')
       }
