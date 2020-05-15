@@ -29,6 +29,7 @@ const EmployeesTable = props => {
           key={`employee_actions_${cols.id}`}
           onHandleUpdate={() => props.onHandleUpdate(cols)}
           onHandleDelete={() => props.onHandleDelete(cols)}
+          hideDelete
         />
       )
     ]

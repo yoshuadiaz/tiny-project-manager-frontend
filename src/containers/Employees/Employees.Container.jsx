@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import { useMachine } from '@xstate/react'
 import loadMachine from '../../machines/fetchMachine'
-import { getFetch, sendPost } from '../../utils/networkUtils'
+import { getFetch, sendPost, sendPut } from '../../utils/networkUtils'
 import '../../components/Employees/Employees.css'
 import EmployeesView from '../../views/Employees.view'
 const EmployeesContainer = () => {
@@ -20,32 +20,57 @@ const EmployeesContainer = () => {
       }
     }
   })
+
+  const [updateEmployee, sendToUpdateEmployeeMachine] = useMachine(loadMachine, {
+    services: {
+      handleFetch: (context, event) => sendPut(`/user/${selectedEmployee.id}`, { ...event.payload }),
+      handleSuccess: () => {
+        closeUpdateEmployeeModal()
+        sendToEmployeesMachine('refresh')
+      }
+    }
+  })
+
   const [createEmployeeModal, setCreateEmployeeModal] = useState(false)
+  const [updateEmployeeModal, setUpdateEmployeeModal] = useState(false)
+  const [selectedEmployee, setSelectedEmployee] = useState(null)
   const closeCreateEmployeeModal = () => setCreateEmployeeModal(false)
   const openCreateEmployeeModal = () => setCreateEmployeeModal(true)
+  const closeUpdateEmployeeModal = () => setUpdateEmployeeModal(false)
+  const openUpdateEmployeeModal = (data) => {
+    setSelectedEmployee(data)
+    setUpdateEmployeeModal(true)
+  }
   const onHandleCreateEmployee = (payload) => {
-    console.log(payload)
-
     sendToCreateEmployeeMachine('submit', { payload })
   }
-  const onHandleDelete = (data) => console.log('Will delete', data)
-  const onHandleUpdate = (data) => console.log('Will update', data)
+  const onHandleDeleteEmployee = (data) => console.log('Will delete', data)
+  const onHandleUpdateEmployee = (payload) => {
+    sendToUpdateEmployeeMachine('submit', { payload })
+  }
 
   useEffect(() => {
     sendToEmployeesMachine('submit')
   }, [])
   return (
     <EmployeesView
-      onHandleCreateEmployee={onHandleCreateEmployee}
       status={employees.value}
       employees={employees.context.data}
-      onHandleDelete={onHandleDelete}
-      onHandleUpdate={onHandleUpdate}
+      // CUD Operations
+      onHandleCreateEmployee={onHandleCreateEmployee}
+      onHandleDeleteEmployee={onHandleDeleteEmployee}
+      onHandleUpdateEmployee={onHandleUpdateEmployee}
       // Create employee
       createEmployeeStatus={createEmployee.value}
       createEmployeeModal={createEmployeeModal}
       closeCreateEmployeeModal={closeCreateEmployeeModal}
       openCreateEmployeeModal={openCreateEmployeeModal}
+      // Update employee
+      selectedEmployee={selectedEmployee}
+      updateEmployeeStatus={updateEmployee.value}
+      updateEmployeeModal={updateEmployeeModal}
+      closeUpdateEmployeeModal={closeUpdateEmployeeModal}
+      openUpdateEmployeeModal={openUpdateEmployeeModal}
     />
   )
 }

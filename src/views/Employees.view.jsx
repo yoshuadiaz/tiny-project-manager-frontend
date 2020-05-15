@@ -2,7 +2,7 @@ import React from 'react'
 import EmployeesTable from '../components/Employees/EmployeesTable'
 import EntityHeadbar from '../components/EntityHeadbar/EntityHeadbar'
 import { Button } from 'semantic-ui-react'
-import CreateEmployeeModal from '../components/Employees/CreateUpdateEmployeeModal'
+import CreateUpdateEmployeeModal from '../components/Employees/CreateUpdateEmployeeModal'
 const EmployeesView = (props) => {
   const {
     createEmployeeModal,
@@ -13,7 +13,13 @@ const EmployeesView = (props) => {
     status,
     employees,
     onHandleDelete,
-    onHandleUpdate
+
+    updateEmployeeModal,
+    openUpdateEmployeeModal,
+    closeUpdateEmployeeModal,
+    onHandleUpdateEmployee,
+    updateEmployeeStatus,
+    selectedEmployee
   } = props
   return (
     <div className='employees dashboard_wrap'>
@@ -27,14 +33,23 @@ const EmployeesView = (props) => {
         <EmployeesTable
           employees={employees}
           onHandleDelete={onHandleDelete}
-          onHandleUpdate={onHandleUpdate}
+          onHandleUpdate={openUpdateEmployeeModal}
+          hideDelete
         />
       )}
-      <CreateEmployeeModal
+      <CreateUpdateEmployeeModal
         isOpen={createEmployeeModal}
         onClose={closeCreateEmployeeModal}
         onHandleSubmit={onHandleCreateEmployee}
-        createEmployeeStatus={createEmployeeStatus}
+        status={createEmployeeStatus}
+      />
+      <CreateUpdateEmployeeModal
+        isOpen={updateEmployeeModal}
+        onClose={closeUpdateEmployeeModal}
+        onHandleSubmit={onHandleUpdateEmployee}
+        status={updateEmployeeStatus}
+        isUpdate
+        initialValues={selectedEmployee}
       />
     </div>
   )

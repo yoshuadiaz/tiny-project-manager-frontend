@@ -1,7 +1,7 @@
 import React from 'react'
 import { useFormik } from 'formik'
 import { Form, FormGroup, Button, ButtonGroup, FormField, Select } from 'semantic-ui-react'
-import { userExtendedValidationSchema } from '../../validations/auth'
+import { userExtendedValidationSchema, userExtendedWithAuthValidationSchema } from '../../validations/auth'
 
 const initialValues = {
   first_name: '',
@@ -23,7 +23,7 @@ const options = [
 const CreateUpdateEmployeeForm = (props) => {
   const formik = useFormik({
     initialValues: props.initialValues || initialValues,
-    validationSchema: userExtendedValidationSchema,
+    validationSchema: props.isUpdate ? userExtendedValidationSchema : userExtendedWithAuthValidationSchema,
     onSubmit: props.onHandleSubmit
   })
   return (
@@ -72,6 +72,7 @@ const CreateUpdateEmployeeForm = (props) => {
           label='Email'
           control='input'
           type='email'
+          disabled={props.isUpdate}
           {...formik.getFieldProps('email')}
           error={
             formik.touched && formik.touched.email && formik.errors && formik.errors.email
@@ -134,31 +135,33 @@ const CreateUpdateEmployeeForm = (props) => {
           }
         />
       </FormGroup>
-      <FormGroup widths={2}>
-        <FormField
-          label='Password'
-          control='input'
-          type='password'
-          {...formik.getFieldProps('password')}
-          value={formik.values.password || ''}
-          error={
-            formik.touched && formik.touched.password && formik.errors && formik.errors.password
-              ? { content: formik.errors.password }
-              : null
-          }
-        />
-        <FormField
-          label='Confirmar Password'
-          control='input'
-          type='password'
-          {...formik.getFieldProps('confirm')}
-          error={
-            formik.touched && formik.touched.confirm && formik.errors && formik.errors.confirm
-              ? { content: formik.errors.confirm }
-              : null
-          }
-        />
-      </FormGroup>
+      {!props.isUpdate && (
+        <FormGroup widths={2}>
+          <FormField
+            label='Password'
+            control='input'
+            type='password'
+            {...formik.getFieldProps('password')}
+            value={formik.values.password || ''}
+            error={
+              formik.touched && formik.touched.password && formik.errors && formik.errors.password
+                ? { content: formik.errors.password }
+                : null
+            }
+          />
+          <FormField
+            label='Confirmar Password'
+            control='input'
+            type='password'
+            {...formik.getFieldProps('confirm')}
+            error={
+              formik.touched && formik.touched.confirm && formik.errors && formik.errors.confirm
+                ? { content: formik.errors.confirm }
+                : null
+            }
+          />
+        </FormGroup>
+      )}
       <ButtonGroup>
         <Button
           type='button'

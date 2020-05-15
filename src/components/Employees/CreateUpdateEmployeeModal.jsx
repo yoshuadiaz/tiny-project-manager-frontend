@@ -4,14 +4,16 @@ import CreateEmployeeForm from '../Forms/CreateUpdateEmployeeForm'
 const CreateUpdateEmployeeModal = (props) => {
   return (
     <ActionModal
-      title='Crear Empleado'
+      title={`${props.isUpdate ? 'Actualizar Empleado' : 'Crear Empleado'}`}
       isOpen={props.isOpen}
       onClose={props.onClose}
     >
       <CreateEmployeeForm
         onHandleSubmit={props.onHandleSubmit}
         onHandleCancel={props.onClose}
-        status={props.createEmployeeStatus}
+        status={props.status}
+        initialValues={props.initialValues}
+        isUpdate={props.isUpdate}
       />
     </ActionModal>
   )

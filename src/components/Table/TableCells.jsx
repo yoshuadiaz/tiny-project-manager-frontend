@@ -12,16 +12,19 @@ export const UserTableCell = props => (
 export const ActionsTableCell = props => (
   <TableCell textAlign='center'>
     <ButtonGroup fluid>
-      <Button
-        icon='trash alternate'
-        negative
-        onClick={props.onHandleDelete}
-      />
+      {!props.hideDelete && (
+        <Button
+          icon='trash alternate'
+          negative
+          onClick={props.onHandleDelete}
+        />
+      )}
       <Button
         icon='edit'
         color='blue'
         onClick={props.onHandleUpdate}
       />
+
     </ButtonGroup>
   </TableCell>
 )
