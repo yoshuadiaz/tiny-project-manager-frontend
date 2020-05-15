@@ -16,3 +16,13 @@ export const sendPost = (route, payload = {}, config = {}) => axios.post(
     ...config
   })
   .then(({ data }) => data.body)
+
+export const sendPut = (route, payload = {}, config = {}) => axios.put(
+`http://localhost:7000/api${route}`, {
+  ...payload
+},
+{
+  withCredentials: true,
+  ...config
+})
+  .then(({ data }) => data.body)
