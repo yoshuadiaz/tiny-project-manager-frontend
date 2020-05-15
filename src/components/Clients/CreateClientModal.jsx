@@ -1,7 +1,6 @@
 
 import React from 'react'
 import ActionModal from '../Modal/ActionModal'
-// import { clientValidationSchema } from '../../validations/client'
 import CreateClientForm from '../Forms/CreateUpdateClientForm'
 function CreateClientModal (props) {
   return (
