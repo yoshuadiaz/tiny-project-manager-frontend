@@ -1,8 +1,9 @@
 import React, { createContext } from 'react'
 import { useMachine } from '@xstate/react'
-import { sendPost } from './utils/networkUtils'
+import { sendPost, getFetch } from './utils/networkUtils'
 
 import AuthContextMachine from './machines/authContextMachine'
+import LoadMachine from './machines/fetchMachine'
 
 export const Context = createContext(AuthContextMachine)
 
@@ -34,10 +35,63 @@ const Provider = ({ children }) => {
     }
   })
 
+  const [genders, sendGenderFetchMachine] = useMachine(LoadMachine, {
+    services: {
+      handleFetch: (context, event) => getFetch('/catalog/gender'),
+      handleSuccess: (context, event) => {}
+    }
+  })
+  const [projectStatus, sendProjectStatusMachine] = useMachine(LoadMachine, {
+    services: {
+      handleFetch: (context, event) => getFetch('/catalog/project_status'),
+      handleSuccess: (context, event) => {}
+    }
+  })
+  const [userStatus, sendUserStatusMachine] = useMachine(LoadMachine, {
+    services: {
+      handleFetch: (context, event) => getFetch('/catalog/user_status'),
+      handleSuccess: (context, event) => {}
+    }
+  })
+  const [workTypes, sendWorkTypesMachine] = useMachine(LoadMachine, {
+    services: {
+      handleFetch: (context, event) => getFetch('/catalog/work_type'),
+      handleSuccess: (context, event) => {}
+    }
+  })
+
+  const getCatalogs = () => {
+    sendGenderFetchMachine('submit')
+    sendProjectStatusMachine('submit')
+    sendUserStatusMachine('submit')
+    sendWorkTypesMachine('submit')
+  }
+
+  const catalogs = {
+    genders: {
+      status: genders.value,
+      data: genders.context.data
+    },
+    projectStatus: {
+      status: projectStatus.value,
+      data: projectStatus.context.data
+    },
+    userStatus: {
+      status: userStatus.value,
+      data: userStatus.context.data
+    },
+    workTypes: {
+      status: workTypes.value,
+      data: workTypes.context.data
+    }
+  }
+
   const value = {
     ...authState.context,
+    catalogs,
     sendToAuthMachine: sendToAuthMachine,
-    state: authState.value
+    state: authState.value,
+    getCatalogs
   }
 
   return (
