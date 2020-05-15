@@ -9,10 +9,13 @@ export const userValidationSchema = {
   last_name: Yup.string()
     .min(3, 'Debe ser un nombre de mínimo 3 caracteres')
     .required('Requerido'),
+  occupation: Yup.string().required('Requerido')
+}
+
+export const authData = {
   email: Yup.string()
     .email('Ingrese un correo válido')
     .required('Requerido'),
-  occupation: Yup.string().required('Requerido'),
   password: Yup.string().required('Requerido'),
   confirm: Yup.string()
     .oneOf([Yup.ref('password'), null], 'Las contraseñas no coinciden').required('Requerido')
@@ -28,7 +31,19 @@ export const userExtendedValidationSchema = Yup.object({
   status_id: Yup.string()
     .matches(uuidV4RegExp, 'Estatus inválido')
     .required('Requerido')
+})
 
+export const userExtendedWithAuthValidationSchema = Yup.object({
+  ...userValidationSchema,
+  ...authData,
+  salary: Yup.number().required('Requerido'),
+  currency: Yup.string().min(3, 'Longitud inválida').max(3, 'Longitud inválida').required('Requerido'),
+  work_type_id: Yup.string()
+    .matches(uuidV4RegExp, 'Jornada inválida')
+    .required('Requerido'),
+  status_id: Yup.string()
+    .matches(uuidV4RegExp, 'Estatus inválido')
+    .required('Requerido')
 })
 
 export const companyValidationSchema = {
@@ -52,7 +67,7 @@ export const companyValidationSchema = {
 }
 
 export const registerValidationSchema = Yup.object().shape({
-  user: Yup.object({ ...userValidationSchema }),
+  user: Yup.object({ ...userValidationSchema, ...authData }),
   company: Yup.object({ ...companyValidationSchema })
 })
 
