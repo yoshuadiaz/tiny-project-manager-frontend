@@ -1,7 +1,8 @@
-import React from 'react'
+import React, { useContext } from 'react'
 import { useFormik } from 'formik'
 import { Form, FormGroup, Button, ButtonGroup, FormField, Select } from 'semantic-ui-react'
 import { userExtendedValidationSchema, userExtendedWithAuthValidationSchema } from '../../validations/auth'
+import { Context as GeneralContext } from '../../Context'
 
 const initialValues = {
   first_name: '',
@@ -12,8 +13,8 @@ const initialValues = {
   confirm: '',
   salary: 1000,
   currency: 'USD',
-  work_type_id: 'cbeb8fb9-bf3f-42ed-8be1-88793e084cc9',
-  status_id: '27ed4728-936e-43c2-a850-c6034ab5d1d2'
+  work_type_id: '',
+  status_id: ''
 }
 
 const options = [
@@ -21,6 +22,18 @@ const options = [
   { key: 'USD', value: 'USD', text: '$USD' }
 ]
 const CreateUpdateEmployeeForm = (props) => {
+  const { catalogs } = useContext(GeneralContext)
+  const userStatuses = catalogs.userStatus.data.map(us => ({
+    key: us.id,
+    value: us.id,
+    text: us.description
+  }))
+  const workTypes = catalogs.workTypes.data.map(wt => ({
+    key: wt.id,
+    value: wt.id,
+    text: wt.description
+  }))
+
   const formik = useFormik({
     initialValues: props.initialValues || initialValues,
     validationSchema: props.isUpdate ? userExtendedValidationSchema : userExtendedWithAuthValidationSchema,
@@ -111,11 +124,13 @@ const CreateUpdateEmployeeForm = (props) => {
         />
 
         <FormField
-          label='Estatus'
-          control='input'
-          type='text'
-          {...formik.getFieldProps('status_id')}
-          value={formik.values.status_id || ''}
+          label='Estado'
+          control={Select}
+          options={userStatuses}
+          fluid
+          name='status_id'
+          value={formik.values.status_id}
+          onChange={(e, target) => formik.handleChange({ ...e, target })}
           error={
             formik.touched && formik.touched.status_id && formik.errors && formik.errors.status_id
               ? { content: formik.errors.status_id }
@@ -124,10 +139,12 @@ const CreateUpdateEmployeeForm = (props) => {
         />
         <FormField
           label='Jornada'
-          control='input'
-          type='text'
-          {...formik.getFieldProps('work_type_id')}
-          value={formik.values.work_type_id || ''}
+          control={Select}
+          options={workTypes}
+          fluid
+          name='work_type_id'
+          value={formik.values.work_type_id}
+          onChange={(e, target) => formik.handleChange({ ...e, target })}
           error={
             formik.touched && formik.touched.work_type_id && formik.errors && formik.errors.work_type_id
               ? { content: formik.errors.work_type_id }
