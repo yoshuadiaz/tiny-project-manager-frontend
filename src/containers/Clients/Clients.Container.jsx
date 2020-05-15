@@ -6,7 +6,7 @@ import ClientsView from '../../views/Clients.view'
 
 const ClientContainer = props => {
   const [selectedClient, setSelectedClient] = useState(null)
-  const [createClientModal, setCreateClientModal] = useState(true)
+  const [createClientModal, setCreateClientModal] = useState(false)
   const [clients, sendToClientMachine] = useMachine(loadMachine, {
     services: {
       handleFetch: (event, context) => getFetch('/client'),
