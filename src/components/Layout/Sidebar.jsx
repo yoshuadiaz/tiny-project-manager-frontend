@@ -11,7 +11,7 @@ const Sidebar = props => {
             {props.items.map(item => (
               <li
                 onClick={() => {
-                  props.handleSelectItem(item)
+                  props.onHandleSelectItem(item)
                 }} className='sidebar_content_item'
                 key={item.id}
               >

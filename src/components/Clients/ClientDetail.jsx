@@ -6,7 +6,14 @@ import EntityHeadbar from '../../components/EntityHeadbar/EntityHeadbar'
 import './ClientDetail.css'
 
 const ClientDetail = props => {
-  const { status, subitems, client } = props
+  const {
+    status,
+    subitems,
+    client,
+    onHandleUpdate,
+    onHandleDelete,
+    onHandleCreateContact
+  } = props
 
   return (
     <div className='clients_detail'>
@@ -18,7 +25,7 @@ const ClientDetail = props => {
           className='clients clients_entityHeadbar'
           title='Todos los Contactos'
         >
-          <Button onClick={props.onHandleCreateContact} icon='add user' color='blue' />
+          <Button onClick={onHandleCreateContact} icon='add user' color='blue' />
         </EntityHeadbar>
         {status === 'success' && subitems.length === 0 && (
           <div>
@@ -29,8 +36,8 @@ const ClientDetail = props => {
         {status === 'success' && subitems.length > 0 && (
           <ContactsTable
             contacts={subitems}
-            onHandleUpdate={props.onHandleUpdate}
-            onHandleDelete={props.onHandleDelete}
+            onHandleUpdate={onHandleUpdate}
+            onHandleDelete={onHandleDelete}
           />
         )}
       </div>
