@@ -19,7 +19,13 @@ const ClientsView = (props) => {
     createContactModal,
     closeCreateContactModal,
     openCreateContactModal,
-    onHandleCreateContact
+    onHandleCreateContact,
+    updateContactModal,
+    onHandleUpdateContact,
+    updateContactStatus,
+    closeUpdateContactModal,
+    openUpdateContactModal,
+    updateInitialValues
   } = props
   return (
     <div>
@@ -27,8 +33,17 @@ const ClientsView = (props) => {
         isOpen={createClientModal}
         onClose={closeCreateClientModal}
         onHandleSubmit={onHandleCreateClient}
-        createClientStatus={createClientStatus}
+        status={createClientStatus}
       />
+      <CreateUpdateContactModal
+        isOpen={updateContactModal}
+        onClose={closeUpdateContactModal}
+        onHandleSubmit={onHandleUpdateContact}
+        status={updateContactStatus}
+        initialValues={updateInitialValues}
+        isUpdate
+      />
+
       <CreateUpdateContactModal
         isOpen={createContactModal}
         onClose={closeCreateContactModal}
@@ -56,7 +71,7 @@ const ClientsView = (props) => {
             subitems={props.subitems}
             status={props.contactsStatus}
             onHandleDelete={props.onHandleDelete}
-            onHandleUpdate={props.onHandleUpdate}
+            openUpdateContactModal={openUpdateContactModal}
             openCreateContactModal={openCreateContactModal}
             onHandleCreateContact={onHandleCreateContact}
           />

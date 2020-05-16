@@ -3,6 +3,7 @@ import { useFormik } from 'formik'
 import { Form, FormGroup, Button, ButtonGroup, FormField, Select, TextArea } from 'semantic-ui-react'
 import { contactValidationSchema } from '../../validations/client'
 import { Context as GeneralContext } from '../../Context'
+import dayjs from 'dayjs'
 
 const initialValues = {
   first_name: '',
@@ -112,6 +113,7 @@ const CreateUpdateEmployeeForm = (props) => {
           control='input'
           type='date'
           {...formik.getFieldProps('birthday')}
+          value={dayjs(formik.values.birthday).format('YYYY-MM-DD')}
           error={
             formik.touched && formik.touched.birthday && formik.errors && formik.errors.birthday
               ? { content: formik.errors.birthday }

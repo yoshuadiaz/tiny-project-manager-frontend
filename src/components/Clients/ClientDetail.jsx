@@ -10,7 +10,7 @@ const ClientDetail = props => {
     status,
     subitems,
     client,
-    onHandleUpdate,
+    openUpdateContactModal,
     onHandleDelete,
     openCreateContactModal
   } = props
@@ -36,7 +36,7 @@ const ClientDetail = props => {
         {status === 'success' && subitems.length > 0 && (
           <ContactsTable
             contacts={subitems}
-            onHandleUpdate={onHandleUpdate}
+            openUpdateContactModal={openUpdateContactModal}
             onHandleDelete={onHandleDelete}
           />
         )}

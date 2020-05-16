@@ -12,6 +12,7 @@ const CreateUpdateContactModal = (props) => {
         onHandleSubmit={props.onHandleSubmit}
         onHandleCancel={props.onClose}
         status={props.createContactStatus}
+        initialValues={props.initialValues}
       />
 
     </ActionModal>

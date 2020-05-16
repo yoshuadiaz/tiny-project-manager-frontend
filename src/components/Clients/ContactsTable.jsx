@@ -49,7 +49,7 @@ const ContactsTable = props => {
       (
         <ActionsTableCell
           key={`contacts_actions_${cols.id}`}
-          onHandleUpdate={() => props.onHandleUpdate(cols)}
+          onHandleUpdate={() => props.openUpdateContactModal(cols)}
           onHandleDelete={() => props.onHandleDelete(cols)}
           hideDelete
         />
