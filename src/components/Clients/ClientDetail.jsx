@@ -12,7 +12,7 @@ const ClientDetail = props => {
     client,
     onHandleUpdate,
     onHandleDelete,
-    onHandleCreateContact
+    openCreateContactModal
   } = props
 
   return (
@@ -25,7 +25,7 @@ const ClientDetail = props => {
           className='clients clients_entityHeadbar'
           title='Todos los Contactos'
         >
-          <Button onClick={onHandleCreateContact} icon='add user' color='blue' />
+          <Button onClick={openCreateContactModal} icon='add user' color='blue' />
         </EntityHeadbar>
         {status === 'success' && subitems.length === 0 && (
           <div>

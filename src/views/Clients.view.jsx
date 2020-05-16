@@ -7,13 +7,19 @@ import '../components/Clients/ClientDetail.css'
 import Idle from '../components/Idle/Idle'
 import ClientsIdle from '../assets/login.jpeg'
 import CreateClientModal from '../components/Clients/CreateClientModal'
+import CreateUpdateContactModal from '../components/Clients/CreateUpdateContactModal'
 const ClientsView = (props) => {
   const {
     createClientModal,
     closeCreateClientModal,
     openCreateClientModal,
     onHandleCreateClient,
-    createClientStatus
+    createClientStatus,
+    createContactStatus,
+    createContactModal,
+    closeCreateContactModal,
+    openCreateContactModal,
+    onHandleCreateContact
   } = props
   return (
     <div>
@@ -22,6 +28,12 @@ const ClientsView = (props) => {
         onClose={closeCreateClientModal}
         onHandleSubmit={onHandleCreateClient}
         createClientStatus={createClientStatus}
+      />
+      <CreateUpdateContactModal
+        isOpen={createContactModal}
+        onClose={closeCreateContactModal}
+        onHandleSubmit={onHandleCreateContact}
+        createContactStatus={createContactStatus}
       />
       <div className='clients dashboard_wrap'>
         <EntityHeadbar
@@ -45,7 +57,8 @@ const ClientsView = (props) => {
             status={props.contactsStatus}
             onHandleDelete={props.onHandleDelete}
             onHandleUpdate={props.onHandleUpdate}
-            onHandleCreateContact={props.onHandleCreateContact}
+            openCreateContactModal={openCreateContactModal}
+            onHandleCreateContact={onHandleCreateContact}
           />
         )}
       </div>
